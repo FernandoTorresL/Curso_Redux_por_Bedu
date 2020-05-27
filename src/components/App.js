@@ -11,41 +11,30 @@ class App extends Component {
 
   async componentDidMount() {
     const respuesta = await axios.get('https://jsonplaceholder.typicode.com/users');
-    console.log('respuesta:', respuesta);
+    //console.log('respuesta:', respuesta.data);
     this.setState({
-      usuarios: [
-        {
-          nombre: 'Fernando',
-          correo: 'fertorresmx@gmail.com',
-          enlace: '@fertorresmx'
-        },
-        {
-          nombre: 'Alejandro',
-          correo: 'fertorresmx2@gmail.com',
-          enlace: '@alejandro'
-        }
-      ]
+      usuarios: respuesta.data
     })
   }
 
   ponerFilas = () => (
     this.state.usuarios.map((usuario) => (
-      <tr>
+      <tr key={ usuario.id }>
         <td>
-          { usuario.nombre }
+          { usuario.name }
         </td>
         <td>
-          { usuario.correo }
+          { usuario.email }
         </td>
         <td>
-          { usuario.enlace }
+          { usuario.website }
         </td>
       </tr>
     ))
     );
 
     render () {
-      console.log(this.state.usuarios);
+      //console.log(this.state.usuarios);
       return (
         <div className = 'margen'>
         <table className = 'tabla'>
